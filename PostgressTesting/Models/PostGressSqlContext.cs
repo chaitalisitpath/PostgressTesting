@@ -6,9 +6,7 @@ namespace PostgressTesting.Models;
 
 public partial class PostGressSqlContext : DbContext
 {
-    public PostGressSqlContext()
-    {
-    }
+   
 
     public PostGressSqlContext(DbContextOptions<PostGressSqlContext> options)
         : base(options)
@@ -18,24 +16,45 @@ public partial class PostGressSqlContext : DbContext
     public virtual DbSet<Student> Students { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=PostGressSQL;Trusted_Connection=True;TrustServerCertificate=True;");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Database=EmployeeDb;Username=postgres;Password=Ips@123;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.StudentId).HasName("PK__Students__32C52B99D2024496");
+            entity.ToTable("students");
 
-            entity.HasIndex(e => e.Email, "UQ__Students__A9D10534A3EA3DB1").IsUnique();
+            entity.HasKey(e => e.StudentId).HasName("pk_students");
 
-            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.HasIndex(e => e.Email).IsUnique();
+
+            entity.Property(e => e.StudentId)
+                .HasColumnName("studentid");
+
+            entity.Property(e => e.FirstName)
+                .HasMaxLength(50)
+                .HasColumnName("firstname");
+
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .HasColumnName("lastname");
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
+
+            entity.Property(e => e.DateOfBirth)
+                .HasColumnName("dateofbirth");
+
             entity.Property(e => e.EnrollmentDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.FirstName).HasMaxLength(50);
-            entity.Property(e => e.LastName).HasMaxLength(50);
+     .HasDefaultValueSql("now()")
+     .HasColumnType("timestamp without time zone")
+     .HasColumnName("enrollmentdate");
+
         });
+
+
 
         OnModelCreatingPartial(modelBuilder);
     }

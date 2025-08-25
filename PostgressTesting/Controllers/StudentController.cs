@@ -17,8 +17,17 @@ namespace PostgressTesting.Controllers
         }
         public IActionResult Index()
         {
-            var students = _context.Students.ToList();
-            return View(students);
+            try
+            {
+                var students = _context.Students.ToList();
+                return View(students);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
         public IActionResult Create()
         {
@@ -30,8 +39,8 @@ namespace PostgressTesting.Controllers
            
             if(ModelState.IsValid)
             {
-                _context.Students.Add(student);
-                _context.SaveChanges();
+                var result = _context.Students.Add(student);
+               var row =  _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return PartialView("_Create", student);

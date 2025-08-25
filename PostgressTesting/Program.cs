@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PostgressTesting.Models;
 using PostgressTesting.Repository.Abstraction;
 using PostgressTesting.Repository.Implementation;
@@ -11,20 +11,33 @@ namespace PostgressTesting
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // ----------------------------
+            // Configure Services
+            // ----------------------------
             builder.Services.AddControllersWithViews();
+
+            // ✅ Configure PostgreSQL DbContext with Retry Policy
             builder.Services.AddDbContext<PostGressSqlContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(
+                    builder.Configuration.GetConnectionString("DefaultConnection"),
+                    npgsqlOptions => npgsqlOptions.EnableRetryOnFailure()
+                ));
+
+            // ✅ Register Repositories
             builder.Services.AddScoped<IStudent, StudentRepository>();
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // ----------------------------
+            // Configure Middleware Pipeline
+            // ----------------------------
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseHsts(); // Default HSTS = 30 days
             }
 
             app.UseHttpsRedirection();
@@ -34,6 +47,7 @@ namespace PostgressTesting
 
             app.UseAuthorization();
 
+            // ✅ Configure Default Route
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Student}/{action=Index}/{id?}");
