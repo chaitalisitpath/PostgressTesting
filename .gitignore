@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore PostgreSql_Query folder inside ProgressTesting/wwwroot
+ProgressTesting/wwwroot/PostgreSql_Query/
