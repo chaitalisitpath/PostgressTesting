@@ -13,9 +13,8 @@ namespace PostgressTesting
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // ----------------------------
+            
             // Configure Services
-            // ----------------------------
             builder.Services.AddControllersWithViews();
 
             // ✅ Configure PostgreSQL DbContext with Retry Policy (EF Core)
@@ -37,13 +36,13 @@ namespace PostgressTesting
 
             var app = builder.Build();
 
-            // ----------------------------
+           
             // Configure Middleware Pipeline
-            // ----------------------------
+            
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseHsts(); // Default HSTS = 30 days
+                app.UseHsts(); 
             }
 
             app.UseHttpsRedirection();
