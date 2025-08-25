@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36327.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostgressTesting", "PostgressTesting\PostgressTesting.csproj", "{4B5D4511-5851-4C85-B9CC-C55DF62D1938}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B5D4511-5851-4C85-B9CC-C55DF62D1938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B5D4511-5851-4C85-B9CC-C55DF62D1938}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B5D4511-5851-4C85-B9CC-C55DF62D1938}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B5D4511-5851-4C85-B9CC-C55DF62D1938}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {418F1C38-A6E9-48FA-BB2B-0F8AC48EDC32}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<PostgressTesting.Models.Student>
+
+
+<div class="d-flex justify-content-between mb-5">
+    <h2>Students List</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentModal">Add Student</button>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First</th>
+            <th>Last</th>
+            <th>Email</th>
+            <th>DOB</th>
+            <th>Enrollment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.StudentId</td>
+                <td>@s.FirstName</td>
+                <td>@s.LastName</td>
+                <td>@s.Email</td>
+                <td>@s.DateOfBirth?.ToString("yyyy-MM-dd")</td>
+                <td>@s.EnrollmentDate?.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#studentEditModal">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@await Html.PartialAsync("_Create", new PostgressTesting.Models.Student())
+@await Html.PartialAsync("_Edit", new PostgressTesting.Models.Student())
+
