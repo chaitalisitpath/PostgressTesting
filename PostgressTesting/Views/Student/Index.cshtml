@@ -29,7 +29,9 @@
                 <td>@s.DateOfBirth?.ToString("yyyy-MM-dd")</td>
                 <td>@s.EnrollmentDate?.ToString("yyyy-MM-dd")</td>
                 <td>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#studentEditModal">Edit</button>
+                    <a asp-action="Edit" asp-route-id="@s.StudentId" class="btn btn-sm btn-primary">
+                        Edit
+                    </a>
                 </td>
             </tr>
         }

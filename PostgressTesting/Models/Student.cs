@@ -13,7 +13,7 @@ public partial class Student
 
     public string? Email { get; set; }
 
-    public DateOnly? DateOfBirth { get; set; }
+    public DateTime? DateOfBirth { get; set; }
 
     public DateTime? EnrollmentDate { get; set; }
 }

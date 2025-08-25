@@ -4,6 +4,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form asp-action="Create" method="post">
+                <input type="hidden" asp-for="StudentId" />
                 <div class="modal-header">
                     <h5 class="modal-title" id="studentModalLabel">Edit Student</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

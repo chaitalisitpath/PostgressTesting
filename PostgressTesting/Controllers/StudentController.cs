@@ -36,19 +36,21 @@ namespace PostgressTesting.Controllers
             }
             return PartialView("_Create", student);
         }
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return PartialView("_Edit");
+            var student = _studentRepo.GetStudentById(id); 
+            return PartialView("_Edit", student);         
         }
         [HttpPost]
         public IActionResult Edit(Student student)
         {
             if (ModelState.IsValid)
             {
-                _studentRepo.UpdateStudent(student);
+                _studentRepo.UpdateStudent(student);  
                 return RedirectToAction("Index");
             }
             return View(student);
         }
+
     }
 }
